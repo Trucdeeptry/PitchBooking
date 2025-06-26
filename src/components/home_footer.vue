@@ -1,10 +1,11 @@
 <template>
-    <footer id="contact" class="w-full mx-auto bg-[#f6f6f1] px-6 sm:px-10 md:px-16 lg:px-20 py-10 sm:py-14 flex flex-col gap-10">
+    <footer id="contact"
+        class="w-full mx-auto bg-[#f6f6f1] px-6 sm:px-10 md:px-16 lg:px-20 py-10 sm:py-14 flex flex-col gap-10">
         <div class="flex flex-col sm:flex-row justify-between">
             <div class="flex flex-col gap-4 max-w-xs">
                 <div class="flex items-center gap-2 text-[#1f3d1f] font-semibold text-lg">
                     <i class="fas fa-archway text-lg"></i>
-                    <span>TÍN</span>
+                    <span>CNT Phú Hoà Arena</span>
                 </div>
                 <div class="flex items-center gap-2 text-sm text-[#1f3d1f]">
                     <i class="far fa-envelope"></i>

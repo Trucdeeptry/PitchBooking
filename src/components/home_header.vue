@@ -43,9 +43,8 @@
 
         <section class="bg-[#f9f9f4] text-center pt-20 py-10 px-4">
             <h1 class="max-w-[600px] mx-auto font-extrabold text-[36px] leading-[44px] uppercase text-green-700">
-                Sân bóng đá Tín
-                <br />
-                <span class="text-2xl text-green-900">Chữ Tín hàng đầu</span>
+                Sân bóng đá CNT Phú Hoà Arena
+
             </h1>
         </section>
 

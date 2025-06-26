@@ -1,6 +1,6 @@
 <template>
     <!-- From Uiverse.io by AbanoubMagdy1 -->
-    <div class="loader">
+    <div class="loader w-5 h-5">
         <div class="circle"></div>
         <div class="circle"></div>
         <div class="circle"></div>
@@ -8,11 +8,11 @@
     </div>
 
 </template>
-
+<script setup></script>
 <style scoped>
 /* From Uiverse.io by AbanoubMagdy1 */
 .loader {
-    --dim: 3rem;
+    --dim: 2rem;
     width: var(--dim);
     height: var(--dim);
     position: relative;
@@ -20,8 +20,8 @@
 }
 
 .loader .circle {
-    --color: #333;
-    --dim: 1.2rem;
+    --color: green;
+    --dim: 0.8rem;
     width: var(--dim);
     height: var(--dim);
     background-color: var(--color);
