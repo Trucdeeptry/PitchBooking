@@ -7,5 +7,5 @@
 
 <script setup>
 import user_layout from '../layout/user_layout.vue';
-import pitch_selector from '../components/pitch_selector.vue';
+import pitch_selector from '../components/home/pitch_selector.vue';
 </script>

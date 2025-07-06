@@ -185,7 +185,7 @@
 
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Số điện thoại *</label>
-                                <input v-model="userInfo.phone" required type="tel" placeholder="Nhập số điện thoại"
+                                <input type="text" v-model="userInfo.phone" required placeholder="Nhập số điện thoại"
                                     class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" />
                             </div>
 
@@ -340,7 +340,8 @@ async function confirmBooking() {
 
 
     const pitch = allPitch.value.find(p =>
-        p.sub_pitches.some(s => s.id == selectedPitch.value.id)
+        p.sub_pitches.some(s => s.id == selectedPitch.value.id) ||
+        p.id == selectedPitch.value.id
     );
     const isExistsPhone = await store.dispatch('profile/isExistsPhone', userInfo.phone)
     let user_id = null
@@ -350,22 +351,25 @@ async function confirmBooking() {
     } else {
         const data = await store.dispatch('profile/createProfiles', {
             full_name: userInfo.name,
-            phone,
-            email
+            phone: userInfo.phone,
+            email: userInfo.email
         })
-        user_id = data.phone
+        user_id = data.id
     }
-    // Viết tới đây thôi có vẻ đúng, mai chạy thử nhé
-
+    console.log(pitch);
+    
     const bookingData = {
         pitch_id: pitch.id,
-        user_id: user_id,
+        booking_date: selectedDate.value,
+        user_id,
         start_time: startTime.value,
         end_time: endTime.value,
         total_price: totalPrice.value,
-        sub_pitch: selectedType == 5 ? selectedPitch.value.id : null,
+        sub_pitch_id: selectedType == 5 ? selectedPitch.value.id : null,
         userInfo: { ...userInfo }
     }
+    console.log(bookingData);
+
     await store.dispatch('booking/createBooking', bookingData)
 
     // Reset form
@@ -399,7 +403,16 @@ function hanldeBookings(bookings) {
         const range = getTimeRange(b.start_time, b.end_time)
         const index = pitches7.value.findIndex(p => b.pitch_id == p.id)
         if (index != -1) {
+            const parent_id = pitches7.value[index].id
             pitches7.value[index].bookedSlots.push(...range)
+            pitches5.value.forEach(p => {
+                // console.log(p);
+                
+                
+                if(p.parent_id == parent_id){
+                    p.bookedSlots.push(...range)
+                }
+            })
         } else {
             console.log('ko tim thay pitch 7');
         }
@@ -414,6 +427,10 @@ function hanldeBookings(bookings) {
             }
         }
     })
+    console.log(pitches5.value);
+    console.log(pitches7.value);
+    
+    
 }
 
 const allPitch = ref(null)
@@ -467,6 +484,8 @@ onMounted(async () => {
             bookings.value = await store.dispatch('pitch/getPitch7', newRoute.date)
         if (bookings.value.length > 0)
             hanldeBookings(bookings.value);
+        console.log(bookings.value);
+        
         isLoadingBookings.value = false
     }, { deep: true, immediate: true })
 }) 

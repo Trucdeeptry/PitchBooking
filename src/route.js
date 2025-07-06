@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import home from "./pages/home.vue";
 import booking from "./pages/booking.vue";
+import admin_layout from "./layout/admin_layout.vue";
+import pitch_management from "./components/admin/pitch_management.vue";
 const router = createRouter({
   history: createWebHistory(),
 
@@ -10,6 +12,18 @@ const router = createRouter({
       path: "/home",
       component: home,
       name: "home",
+    },
+    {
+      path: "/admin",
+      component: admin_layout,
+      name: "admin",
+      children: [
+        {
+          path: "pitch_management",
+          component: pitch_management,
+          name: "pitch_management",
+        },
+      ]
     },
     {
       path: "/booking",

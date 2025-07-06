@@ -11,9 +11,9 @@
 </template>
 
 <script setup>
-import search_form from '../components/search_form.vue'
-import promotions from '../components/promotions.vue'
-import news from '../components/news.vue'
+import search_form from '../components/home/search_form.vue'
+import promotions from '../components/home/promotions.vue'
+import news from '../components/home/news.vue'
 import user_layout from '../layout/user_layout.vue'
 
 </script>

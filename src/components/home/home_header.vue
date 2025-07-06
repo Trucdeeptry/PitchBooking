@@ -28,13 +28,13 @@
                     </nav>
 
                     <div class="flex items-center space-x-6">
-                        <button @click="handleLogin"
+                        <router-link to="/admin" v-if="isAuthenticated"
+                            class="bg-white cursor-pointer border border-[#d1d5db] rounded px-4 py-1 text-[14px] text-[#1a3a1a] hover:bg-[#f3f4f6] transition">
+                            Admin dashboard
+                        </router-link>
+                        <button @click="handleLogin"v-else
                             class="bg-white cursor-pointer border border-[#d1d5db] rounded px-4 py-1 text-[14px] text-[#1a3a1a] hover:bg-[#f3f4f6] transition">
                             Đăng nhập
-                        </button>
-                        <button @click="handleRegister"
-                            class="bg-[#1a3a1a] cursor-pointer text-white rounded px-4 py-1 text-[14px] hover:bg-[#163216] transition">
-                            Đăng ký
                         </button>
                     </div>
                 </div>
@@ -54,13 +54,19 @@
             <span>Best Football Platform 2025</span>
         </div>
     </section>
+    <login_dialog ref="loginDialog"></login_dialog>
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, watch, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import login_dialog from './login_dialog.vue'
 
 const router = useRouter()
+const loginDialog = ref(null)
+const store = useStore()
+const isAuthenticated = computed(() => store.getters['auth/isAuthenticated'])
 
 // Navigation items with labels and routes
 const navigationItems = reactive([
@@ -94,13 +100,6 @@ const setActive = (name) => {
     activeHeader.value = name
 }
 
-const handleLogin = () => {
-    router.push('/login')
-}
-
-const handleRegister = () => {
-    router.push('/register')
-}
 
 // Set active based on current route (optional)
 const setActiveFromRoute = () => {
@@ -110,9 +109,13 @@ const setActiveFromRoute = () => {
         activeHeader.value = activeItem.label
     }
 }
+function handleLogin() {
+    if (loginDialog.value) {
+        loginDialog.value.OpenDialog()
+    }
+}
 
-// Watch for route changes (optional)
-import { watch, onMounted } from 'vue'
+
 
 onMounted(() => {
     setActiveFromRoute()

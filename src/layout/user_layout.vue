@@ -6,6 +6,6 @@
 
 
 <script setup>
-import home_header from '../components/home_header.vue'
-import home_footer from '../components/home_footer.vue'
+import home_header from '../components/home/home_header.vue'
+import home_footer from '../components/home/home_footer.vue'
 </script>
